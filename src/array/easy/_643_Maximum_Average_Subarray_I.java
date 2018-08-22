@@ -1,4 +1,4 @@
-package array;
+package array.easy;
 
 public class _643_Maximum_Average_Subarray_I {
 

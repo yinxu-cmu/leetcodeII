@@ -1,4 +1,4 @@
-package array;
+package array.easy;
 
 public class _605_Can_Place_Flowers {
 
