@@ -1,5 +1,8 @@
 package hashtable.easy;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class _409_Longest_Palindrome {
 
     /**
@@ -23,6 +26,31 @@ public class _409_Longest_Palindrome {
      *
      * 易错题。
      * 需要考虑特殊情况"ccc"
-     * 
+     *
+     * cnt 为奇数时，cnt - 1 个char也是可以用的。 注意， 这个容易被忽略。
      */
+
+    public int longestPalindrome(String s) {
+        //cnt % 2 == 0, and 1
+        int res = 0;
+        int max = 0;
+        boolean odd = false;
+        Map<Character, Integer> map = new HashMap<>();
+        char[] arr = s.toCharArray();
+        for (Character ch : arr) {
+            int cnt = map.getOrDefault(ch, 0);
+            map.put(ch, cnt + 1);
+        }
+        for (int value : map.values()) {
+            if (value % 2 == 0) {
+                res += value;
+            } else {
+                //odd, value - 1 chars can be used. ATTN
+                res += value - 1;
+                odd = true;
+            }
+        }
+
+        return res + (odd ? 1 : 0);
+    }
 }
