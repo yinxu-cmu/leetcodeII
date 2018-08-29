@@ -79,6 +79,85 @@ public class _146_LRU_Cache {
 
     /**
      * 高级解法.
-     * 
+     * O(1)的 put, get 时间。
+     * 用doubly linked list 代替之前解法的list来存储 LRU 关系， 因为doubly linked list可以实现对node的O(1) add和get。
+     * node需要既有key, 又有value, 才能实现O(1).
      */
+    class LRUCacheO1 {
+
+        class Node {
+            int val;
+            int key;
+            Node pre;
+            Node post;
+            public Node() {}
+            public Node(int key, int val) {
+                this.val = val;
+                this.key = key;
+            }
+        }
+
+        private void addNode(Node node) {
+            Node tmp = head.post;
+            head.post = node;
+            node.pre = head;
+            node.post = tmp;
+            tmp.pre = node;
+        }
+
+        private void removeNode(Node node) {
+            Node before = node.pre;
+            Node after = node.post;
+            before.post = after;
+            after.pre = before;
+        }
+
+        int capacity;
+        int cnt = 0;
+        Map<Integer, Node> map;
+        Node head, tail;
+
+        public LRUCacheO1(int capacity) {
+            this.capacity = capacity;
+            map = new HashMap<>();
+            head = new Node();
+            tail = new Node();
+            head.post = tail;
+            tail.pre = head;
+        }
+
+        public int get(int key) {
+            Node node = map.get(key);
+            if(node == null) {
+                return -1;
+            } else {
+                //update dblinked list
+                removeNode(node);
+                addNode(node);
+
+                return node.val;
+            }
+        }
+
+        public void put(int key, int value) {
+            Node node = map.get(key);
+            if (node != null) {
+                removeNode(node);
+                node.val = value;
+                addNode(node);
+            } else {
+                Node newNode = new Node(key, value);
+                map.put(key, newNode);
+                addNode(newNode);
+                cnt++;
+            }
+            if (cnt > capacity) {
+                //remove tail
+                Node before = tail.pre;
+                removeNode(before);
+                map.remove(before.key);
+                cnt--;
+            }
+        }
+    }
 }
