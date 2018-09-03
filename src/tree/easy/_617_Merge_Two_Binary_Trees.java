@@ -1,5 +1,7 @@
 package tree.easy;
 
+import java.util.Stack;
+
 public class _617_Merge_Two_Binary_Trees {
     /**
      * Given two binary trees and imagine that when you put one of them to cover the other, some nodes of the two trees are overlapped while the others are not.
@@ -42,11 +44,41 @@ public class _617_Merge_Two_Binary_Trees {
 
     /**
      * iterative.
-     *
+     * 有点难.
+     * 理清思路：merge t1 到 t2. 然后traversal.
      */
     public TreeNode mergeTrees1(TreeNode t1, TreeNode t2) {
         /**
-         * 
+         * root
+         * stack<[]>, root1, root2
+         * while
+         *   pop
+         *   //n1,n2 both !null
+         *   n0.val += n1.val
+         *   if(n0.left is null && n1.left !null): continue;
+         *   if(n0.left !null && n1.left ==null): n1.left=n0.left;
+         *   if(both !null) stack.push([])
          */
+        if (t1 == null && t2 == null) return null;
+        if (t1 == null || t2 == null) return t1 == null ? t2 : t1;
+        Stack<TreeNode[]> stack = new Stack<>();
+        stack.push(new TreeNode[]{t1, t2});//
+        while (!stack.empty()) {//[3,4,5,5,4]
+            //left -> right
+            TreeNode[] n = stack.pop();//[2,3]
+            n[1].val += n[0].val;
+            if (n[0].right != null && n[1].right == null) {
+                n[1].right = n[0].right;
+            } else if (n[0].right != null && n[1].right != null) {
+                stack.push(new TreeNode[]{n[0].right, n[1].right});
+            }
+
+            if (n[0].left != null && n[1].left == null) {
+                n[1].left = n[0].left;
+            } else if (n[0].left != null && n[1].left != null) {
+                stack.push(new TreeNode[]{n[0].left, n[1].left});
+            }
+        }
+        return t2;
     }
 }
