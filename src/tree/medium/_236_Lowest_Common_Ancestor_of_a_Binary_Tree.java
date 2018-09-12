@@ -1,5 +1,10 @@
 package tree.medium;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 public class _236_Lowest_Common_Ancestor_of_a_Binary_Tree {
     /**
      * Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.
@@ -32,5 +37,70 @@ public class _236_Lowest_Common_Ancestor_of_a_Binary_Tree {
      * p and q are different and both values will exist in the binary tree.
      */
 
-    
+    public TreeNode lowestCommonAncestor1(TreeNode root, TreeNode p, TreeNode q) {
+        /**
+         * 从root开始，先DFS找p，所有经过的node存list。
+         * 再从root开始找q, map contains return node.
+         *
+         * DFS:
+         * preorder traversal. return list? 直接存hashmap?
+         * recursion
+         * dfs()
+         * if null, ret.
+         * if root.val ==, map.add(root) ret.
+         * else
+         *   dfs(left)
+         *   dfs(right)
+         */
+        if (root == null) return null;
+        //p
+        List<TreeNode> pathP = dfs(root, p.val); //1
+       //q
+        List<TreeNode> pathQ = dfs(root, q.val);//1->2->3->5
+
+        int i = 0;
+        while (i < pathP.size() && i < pathQ.size() && pathP.get(i) == pathQ.get(i)) {
+            i++;
+        }
+        return pathP.get(i - 1);
+
+    }
+
+    private List<TreeNode> dfs(TreeNode root, int target) {
+        /**
+         *     1
+         *    / \
+         *   2  3
+         *
+         *   search 2
+         */
+        List<TreeNode> res = new ArrayList<>();
+        if (root == null) return res;
+        if (root.val == target) {
+            res.add(root);
+        } else {
+            List<TreeNode> left = dfs(root.left, target);
+            List<TreeNode> right = dfs(root.right, target);
+            if (left.size() > 0) {
+                res.add(root);
+                res.addAll(left);
+            } else if (right.size() > 0) {
+                res.add(root);
+                res.addAll(right);
+            }
+
+        }
+        return res;
+    }
+
+    /**
+     * 简洁版recursion.
+     */
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null || root == p || root == q) return root;
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        if (left != null && right != null) return root;
+        return left == null ? right : left;
+    }
 }
