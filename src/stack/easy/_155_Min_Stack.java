@@ -14,6 +14,11 @@ public class _155_Min_Stack {
      * two stacks
      * stack1, store in order //2,1
      * stack2, sorted min-max //2,1
+     *
+     * 2-1-3
+     * stack1: 3-1-2
+     * stack2: 1-2
+     *
      */
     class MinStack {
 
@@ -51,9 +56,11 @@ public class _155_Min_Stack {
     /**
      * one stack solution.
      *
-     * stack //3,2,1
-     * //0,-1,
-     * min = 2
+     * stack保存和min的diff
+     *
+     * input 2,1
+     * stack: -1,0 //1,2
+     * min = 1
      */
     public class MinStackOne {
         long min;
