@@ -9,8 +9,12 @@ public class _381_Insert_Delete_GetRandom_O1_Duplicates_allowed {
      * add; map1,and list
      * remove: map.get index list, remove last, if size == 0, remove pair. list, remove by swap. update map index list, replace last index.
      * random: nextInt(list size)
+     *
+     * 类似380.
+     * 有点难。
+     * LinkedHashSet, 一定要用LinkedHashSet才能保证o(1), 具体data structure的实现需要另看。
      */
-    Map<Integer, LinkedHashSet<Integer>> map;
+    Map<Integer, LinkedHashSet<Integer>> map; //如果用ArrayList代替HashSet的话remove特点元素是o(n)
     List<Integer> list;
     Random random;
 
@@ -52,7 +56,7 @@ public class _381_Insert_Delete_GetRandom_O1_Duplicates_allowed {
                 LinkedHashSet<Integer> lastValIndexList = map.get(lastVal);
                 //update lastvalindexlist, remove last index, add new one
                 lastValIndexList.remove(list.size() - 1);
-                lastValIndexList.add(index);//ATTN! 应该从头部add, 把老的index逐步代替掉，不然可能index out of range error.
+                lastValIndexList.add(index);
                 indexList.remove(index);
             } else {
                 indexList.remove(list.size() - 1);

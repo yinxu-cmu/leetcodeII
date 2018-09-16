@@ -5,6 +5,8 @@ public class _387_First_Unique_Character_in_a_String {
     /**
      * 26 长度的array存每个char的出现频率
      *
+     * 再遍历这个array， 找出出现频率为1的， 再从中选出index最小的。
+     *
      * @param s
      * @return
      */
