@@ -43,12 +43,11 @@ public class _46_Permutations {
             for (int i = 0; i < target.size(); i++) {
                 curList.add(target.get(i));
                 List<Integer> newTarget = new ArrayList<>(target);
-                newTarget.remove(Integer.valueOf(target.get(i)));
+                newTarget.remove(Integer.valueOf(target.get(i))); //另一种处理方法。if(tempList.contains(nums[i])) continue; // element already exists, skip
                 dfs(curList, newTarget, res, size);
                 curList.remove(curList.size() - 1);
             }
         }
-
     }
 
     /**
