@@ -62,6 +62,8 @@ public class _132_Palindrome_Partitioning_II {
     /**
      * DP解法
      * 有点难。
+     *
+     * 二维DP。
      * https://leetcode.com/problems/palindrome-partitioning-ii/discuss/42213/Easiest-Java-DP-Solution-(97.36)
      *
      * cut[i] is the minimum of cut[j - 1] + 1 (j <= i), if [j, i] is palindrome.
