@@ -79,16 +79,16 @@ public class _381_Insert_Delete_GetRandom_O1_Duplicates_allowed {
     }
 
     public static void main(String[] args) {
-        _381_Insert_Delete_GetRandom_O1_Duplicates_allowed sol = new _381_Insert_Delete_GetRandom_O1_Duplicates_allowed();
-        boolean r1 = sol.insert(4);
-        boolean r2 = sol.insert(3);
-        boolean r3 = sol.insert(4);
-        boolean r4 = sol.insert(2);
-        boolean r5 = sol.insert(4);
-        boolean r6 = sol.remove(4);
-        boolean r7 = sol.remove(3);
-        boolean r8 = sol.remove(4);
-        boolean r9 = sol.remove(4);
+//        _381_Insert_Delete_GetRandom_O1_Duplicates_allowed sol = new _381_Insert_Delete_GetRandom_O1_Duplicates_allowed();
+//        boolean r1 = sol.insert(4);
+//        boolean r2 = sol.insert(3);
+//        boolean r3 = sol.insert(4);
+//        boolean r4 = sol.insert(2);
+//        boolean r5 = sol.insert(4);
+//        boolean r6 = sol.remove(4);
+//        boolean r7 = sol.remove(3);
+//        boolean r8 = sol.remove(4);
+//        boolean r9 = sol.remove(4);
 
         //1: 2 3 5
         //9: 0 1
